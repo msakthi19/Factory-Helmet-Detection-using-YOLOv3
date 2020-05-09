@@ -1,10 +1,12 @@
 # Factory Helmet Detection using YOLO3 (Detection, Training, and Evaluation)
 
-## Detection
+## Required Files:
 
-Grab the pretrained weights of yolo3 from https://pjreddie.com/media/files/yolov3.weights.
+Grab the pretrained weights of YOLOv3 from:  https://drive.google.com/open?id=1tqh3UMkL2q1aOmoofFNXqa1CBcRpB70n
 
-```python yolo3_one_file_to_detect_them_all.py -w yolo3.weights -i dog.jpg``` 
+Download pretrained weights for backend at:  https://drive.google.com/file/d/1m94x13Sk1ajaVszPi1s5CJoF1V_DYMWR/view?usp=sharing
+
+**This weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without this weights.**
 
 ## Training
 
@@ -63,12 +65,6 @@ The configuration file is a json file, which looks like this:
 
 The ```labels``` setting lists the labels to be trained on. Only images, which has labels being listed, are fed to the network. The rest images are simply ignored. 
 
-Download pretrained weights for backend at:
-
-https://1drv.ms/u/s!ApLdDEW3ut5fgQXa7GzSlG-mdza6
-
-**This weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without this weights.**
-
 ### 3. Generate anchors for your dataset (optional)
 
 `python gen_anchors.py -c config.json`
@@ -80,6 +76,8 @@ Copy the generated anchors printed on the terminal to the ```anchors``` setting 
 `python train.py -c config.json`
 
 By the end of this process, the code will write the weights of the best model to file helmets.h5 (or whatever name specified in the setting "saved_weights_name" in the config.json file). The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
+
+or download a trained model to directly use for detection from : https://drive.google.com/open?id=1hAjLC-zCTmx6D8Bbahw3vtYExAtfuNWA
 
 ### 5. Perform detection using trained weights on image, set of images, video
 `python predict.py -c config.json -i /path/to/image/or/video`
